@@ -28,7 +28,7 @@ As a result, the only reasonable way to know how efficient a piece of code is is
 But there are a few ideas that are generally true, such as branches being expensive (speaking of time).
 
 If/then/else statements are almost guaranteed to result in branches unless the compiler somehow manages
-to optimize them away. But in some cases there are logica√l and mathematical ways of accomplishing the same
+to optimize them away. But in some cases there are logical and mathematical ways of accomplishing the same
 results. tolower is such a case.
 
 tolower uses the fact that certain mathematical operations causes over- or underflow, which results in the
@@ -41,7 +41,7 @@ be zero, but if Carry is 1, you can get any power of 2 value from 128 down to 1.
 
 ```SBB	register1, register2```
 
-If both registers are zero, if Carry is also 0, all will remain 0. But if Carry is 1, register2 will underf√low
+If both registers are zero, if Carry is also 0, all will remain 0. But if Carry is 1, register2 will underflow
 and turn into 0xFF. Register2 can then be AND'ed with any value to get any arbitrary value, so that you get
 zero if the "condition" is false and <anyvalue> if the "condition" is true.
 
