@@ -1,4 +1,8 @@
 .text
+
+L0:
+	inc	%rdi
+
 .global xtolower
 xtolower:
 	xor	%eax,%eax
@@ -15,10 +19,7 @@ xtolower:
 	and	%ah,%al		// both conditions must be met
 	add	%al,(%rdi)
 
-	inc	%rdi
-	mov	(%rdi),%ah
-	or	%ah,%ah
-	jnz	xtolower
+	jnz	L0
 
 	ret
 
