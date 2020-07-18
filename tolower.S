@@ -19,7 +19,8 @@ xtolower:
 
 	and	%ah,%al		// both conditions must be met
 	add	%al,(%rdi)	// will write to every single character in the string, including the zero termination
-				// but only actally modify if both conditions are met, if not met %al is zero
+				// but only actually modify if both conditions are met
+				// if not met %al is zero and nothing is actually modified
 
 	jnz	L0
 
