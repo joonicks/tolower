@@ -56,10 +56,10 @@ character is greater than 'Z', thus if it is greater, Carry will be set to 1. El
 If you wish to use this code in your own project;
 * copy the tolower.S file,
 * edit your Makefile to include it
-	* `gcc -c tolower.S -o tolower.o`
+	* `gcc -c tolower.S`
 	* Also add it to the list of object files to include in your binary
 * add the proper prototype to your C headers
-	* `void xtolower(char *)`
+	* `void xtolower(char *);`
 * call it
 * profit
 
