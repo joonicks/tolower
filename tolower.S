@@ -9,7 +9,7 @@ xtolower:
 
 	mov	(%rdi),%bl
 
-	cmp	$91,%bl		// cmp is a sub instruction that discards the result, but sets flags
+	cmpb	$91,(%rdi)	// cmp is a sub instruction that discards the result, but sets flags
 				// <='Z' - 91 == -1 --> underflow, Carry = 1
 	rcr	$3,%al		// bh = 0x20 if char <= 'Z'
 
