@@ -10,10 +10,11 @@ To demonstrate how to write and implement branchless assembly, applied to a usef
 ```
 void xtolower(char *text)
 {
+	unsigned char mod;
 	do
 	{
-		if (*text >= 'A' && *text <= 'Z')
-			*text = *text + 32;
+		mod = (*text >= 'A' && *text <= 'Z') ? 32 : 0;
+		*text += mod;
 	}
 	while(*(text++));
 }
@@ -22,7 +23,7 @@ void xtolower(char *text)
 # How it works
 Back in the early days with 486'es and before, predicting the runtime of any given code was almost humanly
 possible for a nerdy enough geek. But current day (year 2020) processors are far more complicated with
-multilevel caches, paralell pipelines, prefetchers, instruction reschedulers, branch predictors and threads.
+multilevel caches, parallel pipelines, prefetchers, instruction reschedulers, branch predictors and threads.
 As a result, the only reasonable way to know how efficient a piece of code is is to run it and time it.
 
 But there are a few ideas that are generally true, such as branches being expensive (speaking of time).
@@ -32,7 +33,7 @@ to optimize them away. But in some cases there are logical and mathematical ways
 results. tolower is such a case.
 
 tolower uses the fact that certain mathematical operations causes over- or underflow, which results in the
-Carry bit being set. And the Carry bit can pretty easily be turned into any value. Such as...
+Carry bit being set. And the Carry bit can pretty easily be turned into any value. With, for example...
 
 ```RCR	#, register```
 
@@ -49,8 +50,8 @@ In the tolower code, the "condition" looks like this:
 
 ```ADD	$191, %bh```
 
-The chat to be tested is stored in %bh, adding 191 to it will result in a value greater than 255 if the
-character is greater than 'Z', thus if it is greater, Carry will be set to 1. Else Carry is set to 0.
+The character to be tested is stored in %bh, adding 191 to it will result in a value greater than 255 if the
+character is greater than 'Z', thus if it is greater, Carry will be set to 1, otherwise Carry is set to 0.
 
 # Using
 If you wish to use this code in your own project;
